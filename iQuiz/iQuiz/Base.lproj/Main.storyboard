@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZv-DM-MjL">
-                                <rect key="frame" x="0.0" y="63" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="53" width="393" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="393" id="7p2-cq-MeS"/>
-                                    <constraint firstAttribute="height" constant="44" id="hHG-Ir-kSb"/>
+                                    <constraint firstAttribute="width" constant="393" id="6C5-dT-mbu"/>
+                                    <constraint firstAttribute="height" constant="44" id="fWn-2Z-RSC"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Settings" width="83" id="Go5-Zo-wGI">
@@ -32,18 +32,22 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Welcome to iQuiz!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-Fj-3wD">
-                                <rect key="frame" x="72.000000000000014" y="118" width="249.33333333333337" height="38.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to iQuiz!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-Fj-3wD">
+                                <rect key="frame" x="72.000000000000014" y="97" width="249.33333333333337" height="38.333333333333343"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249.33000000000001" id="6vV-Lf-wwP"/>
+                                    <constraint firstAttribute="height" constant="38.329999999999998" id="Ces-OO-pYt"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zkh-Fq-jXf">
-                                <rect key="frame" x="16" y="195" width="361" height="543"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zkh-Fq-jXf">
+                                <rect key="frame" x="16" y="143" width="361" height="413"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="543" id="hYF-IG-IvM"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="361" id="iCX-7W-zYz"/>
+                                    <constraint firstAttribute="width" constant="361" id="4Kg-mx-h54"/>
+                                    <constraint firstAttribute="height" constant="413" id="mTV-Jf-O1v"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TopicCell" textLabel="23X-cj-H3B" detailTextLabel="J0H-xG-Ywo" style="IBUITableViewCellStyleSubtitle" id="s56-LP-bah" customClass="topicTableCell" customModule="iQuiz" customModuleProvider="target">
@@ -77,13 +81,15 @@
                         <viewLayoutGuide key="safeArea" id="wAB-ED-DOF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="Zkh-Fq-jXf" secondAttribute="trailing" constant="16" id="Ka6-zb-MAp"/>
-                            <constraint firstItem="cZv-DM-MjL" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="c9P-cU-a81"/>
-                            <constraint firstItem="cZv-DM-MjL" firstAttribute="top" secondItem="lKN-fW-UvA" secondAttribute="top" constant="63" id="eok-8N-seY"/>
-                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="gpo-ao-dTx"/>
-                            <constraint firstItem="FLC-Fj-3wD" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="kgV-uj-7KG"/>
-                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="FLC-Fj-3wD" secondAttribute="bottom" constant="38.670000000000002" id="kqJ-Xb-s5D"/>
-                            <constraint firstItem="wAB-ED-DOF" firstAttribute="bottom" secondItem="Zkh-Fq-jXf" secondAttribute="bottom" constant="46" id="su0-p3-wLH"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="4Zs-hy-bSD"/>
+                            <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="FLC-Fj-3wD" secondAttribute="trailing" constant="71.670000000000002" id="ADU-6U-W1H"/>
+                            <constraint firstItem="FLC-Fj-3wD" firstAttribute="top" secondItem="cZv-DM-MjL" secondAttribute="bottom" id="DOh-Ll-Y9L"/>
+                            <constraint firstItem="cZv-DM-MjL" firstAttribute="top" secondItem="lKN-fW-UvA" secondAttribute="top" constant="53" id="NFo-OE-rnD"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="FLC-Fj-3wD" secondAttribute="bottom" constant="7.6699999999999999" id="Qfq-1V-3RA"/>
+                            <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="Zkh-Fq-jXf" secondAttribute="trailing" constant="16" id="SxU-kz-ads"/>
+                            <constraint firstAttribute="trailing" secondItem="cZv-DM-MjL" secondAttribute="trailing" id="VTv-zA-xTV"/>
+                            <constraint firstItem="cZv-DM-MjL" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="kYI-8q-orj"/>
+                            <constraint firstItem="FLC-Fj-3wD" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="o2A-TU-fWX"/>
                         </constraints>
                     </view>
                     <connections>
