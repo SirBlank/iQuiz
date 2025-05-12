@@ -20,7 +20,6 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZv-DM-MjL">
                                 <rect key="frame" x="0.0" y="53" width="393" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="393" id="6C5-dT-mbu"/>
                                     <constraint firstAttribute="height" constant="44" id="fWn-2Z-RSC"/>
                                 </constraints>
                                 <items>
@@ -33,9 +32,9 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to iQuiz!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLC-Fj-3wD">
-                                <rect key="frame" x="72.000000000000014" y="97" width="249.33333333333337" height="38.333333333333343"/>
+                                <rect key="frame" x="71.666666666666671" y="97" width="249.66666666666663" height="38.333333333333343"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="249.33000000000001" id="6vV-Lf-wwP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="249.33000000000001" id="6vV-Lf-wwP"/>
                                     <constraint firstAttribute="height" constant="38.329999999999998" id="Ces-OO-pYt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -46,7 +45,7 @@
                                 <rect key="frame" x="16" y="143" width="361" height="413"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="361" id="4Kg-mx-h54"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="361" id="4Kg-mx-h54"/>
                                     <constraint firstAttribute="height" constant="413" id="mTV-Jf-O1v"/>
                                 </constraints>
                                 <prototypes>
@@ -92,16 +91,55 @@
                             <constraint firstItem="FLC-Fj-3wD" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="o2A-TU-fWX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xZc-I3-VOr"/>
                     <connections>
                         <outlet property="topicTable" destination="Zkh-Fq-jXf" id="KZT-bZ-bys"/>
+                        <segue destination="qgU-Or-hY7" kind="presentation" identifier="goToQuestionVC" modalPresentationStyle="fullScreen" id="Uzi-2z-OEN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ugk-6l-YMo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477.0992366412213" y="-9.1549295774647899"/>
         </scene>
+        <!--Question View Controller-->
+        <scene sceneID="DXk-Pk-Wep">
+            <objects>
+                <viewController id="qgU-Or-hY7" customClass="QuestionViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vja-B9-upM">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AT5-8C-ZMG">
+                                <rect key="frame" x="108" y="416" width="177" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1u-c4-DwV">
+                                <rect key="frame" x="16" y="85" width="87" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left" catalog="system" title="Back"/>
+                                <connections>
+                                    <segue destination="54Z-b5-dYT" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="iax-EL-8pd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vAk-4T-ISt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="topicLabel" destination="AT5-8C-ZMG" id="EJU-em-8b6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbW-WT-FPW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2223.6641221374043" y="-9.1549295774647899"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="95"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

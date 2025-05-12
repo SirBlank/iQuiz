@@ -65,6 +65,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return topics.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToQuestionVC", sender: topics[indexPath.row].name)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToQuestionVC" {
+            if let destinationVC = segue.destination as? QuestionViewController,
+               let name = sender as? String {
+                    destinationVC.receivedData = name
+                }
+        }
+    }
 
     /*
     // MARK: - Navigation
