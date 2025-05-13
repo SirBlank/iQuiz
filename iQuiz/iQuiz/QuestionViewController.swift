@@ -58,6 +58,14 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
             currentQuestions = questionBank[data] ?? []
             showCurrentQuestion()
         }
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeLeft(_:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    @objc func handleSwipeLeft(_ gesture: UISwipeGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
