@@ -42,6 +42,11 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        score = 0
+        currentIndex = 0
+        selectedAnswerIndex = nil
+        hasSubmitted = false
+        
         answerTable.delegate = self
         answerTable.dataSource = self
         
@@ -96,12 +101,11 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func submitTapped(_ sender: Any) {
         guard let selected = selectedAnswerIndex else { return }
         
-        let correctIndex = currentQuestions[currentIndex].correctIndex
-        if selected == correctIndex {
-            score += 1
-        }
-        
         if !hasSubmitted {
+            let correctIndex = currentQuestions[currentIndex].correctIndex
+            if selected == correctIndex {
+                score += 1
+            }
             hasSubmitted = true
             answerTable.reloadData()
             submitBtn.setTitle("Next", for: .normal)
@@ -110,7 +114,6 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
             if currentIndex < currentQuestions.count {
                 showCurrentQuestion()
             } else {
-                submitBtn.setTitle("Go To Results", for: .normal)
                 resultBtn.isHidden = false
                 submitBtn.isHidden = true
                 let final_score = "\(score)/\(numQuestions)"
