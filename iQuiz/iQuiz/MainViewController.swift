@@ -13,6 +13,12 @@ struct Topic {
     var img: UIImage?
 }
 
+struct Question {
+    var text: String
+    var answers: [String]
+    var correctIndex: Int
+}
+
 class topicTableCell: UITableViewCell {
     @IBOutlet weak var topicLabel: UILabel!
 }
