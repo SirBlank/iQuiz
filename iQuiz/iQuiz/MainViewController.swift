@@ -31,13 +31,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         topicTable.dataSource = self
         topicTable.delegate = self
         
-        let defaultURL = "http://tednewardsandbox.site44.com/questions.json"
-        let savedURL = UserDefaults.standard.string(forKey: "quizDataURL") ?? defaultURL
-        sendRequest(url: savedURL)
+        if let savedData = UserDefaults.standard.data(forKey: "quizData") {
+            parseData(data: savedData)
+        } else {
+            sendRequest(url: "http://tednewardsandbox.site44.com/questions.json")
+        }
     }
     
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
+    }
+    
+    func parseData(data: Data) {
+        let decoder = JSONDecoder()
+        do {
+            let decodedTopics = try decoder.decode([Topic].self, from: data)
+            self.topics = decodedTopics
+        } catch {
+            return
+        }
     }
     
     func sendRequest(url: String) {
@@ -59,8 +71,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
           
             DispatchQueue.main.async {
                 if error == nil {
-                    NSLog(response!.description)
-              
                     let response = response! as! HTTPURLResponse
               
                     var headers = ""
@@ -76,7 +86,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         do {
                             self.topics = try decoder.decode([Topic].self, from: data!)
                             self.topicTable.reloadData()
-                            print(self.topics)
                         } catch {
                             print(error)
                         }
