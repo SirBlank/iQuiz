@@ -36,10 +36,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             sendRequest(url: "http://tednewardsandbox.site44.com/questions.json")
         }
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFromUserDefaults), for: .valueChanged)
+        topicTable.refreshControl = refreshControl
     }
     
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
+    }
+    
+    @objc func refreshFromUserDefaults() {
+        if let savedData = UserDefaults.standard.data(forKey: "quizData") {
+            parseData(data: savedData)
+            topicTable.reloadData()
+        } else {
+            print("No saved data in UserDefaults, resorting to default state.")
+        }
+        print("Refreshed I guess?")
+        topicTable.refreshControl?.endRefreshing()
     }
     
     func parseData(data: Data) {
