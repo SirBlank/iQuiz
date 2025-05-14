@@ -7,50 +7,54 @@
 
 import UIKit
 
-struct Topic {
-    var name: String
+struct Topic: Codable {
+    var title: String
     var desc: String
-    var img: UIImage?
+    var questions: [Question]
 }
 
-struct Question {
+struct Question: Codable {
     var text: String
+    var answer: String
     var answers: [String]
-    var correctIndex: Int
 }
 
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var addressField: UITextField!
     @IBOutlet weak var topicTable: UITableView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    @IBAction func settingTap(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
+    var topics = [Topic]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        topicTable.dataSource = self
+        topicTable.delegate = self
+        
+        let defaultURL = "http://tednewardsandbox.site44.com/questions.json"
+        let savedURL = UserDefaults.standard.string(forKey: "quizDataURL") ?? defaultURL
+        sendRequest(url: savedURL)
     }
     
-    @IBAction func goPushed(_ sender: Any) {
-        var url = URL(string: self.addressField.text!)
+    override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
+    }
+    
+    func sendRequest(url: String) {
+        let url = URL(string: url)
         
         if url == nil {
-            NSLog("Bad address")
             return
-        } else {
-            var comps = URLComponents(url: url!, resolvingAgainstBaseURL: false)
-            comps?.scheme = "https"
-            url = comps?.url!
         }
         
-        var request = URLRequest(url: url!)
+        var comps = URLComponents(url: url!, resolvingAgainstBaseURL: false)
+        comps?.scheme = "https"
+        let new_url = comps?.url
+        
+        var request = URLRequest(url: new_url!)
         request.httpMethod = "GET"
         
-        spinner.startAnimating()
-        
-        (URLSession.shared.dataTask(with: url!) {
+        (URLSession.shared.dataTask(with: new_url!) {
             data, response, error in
           
             DispatchQueue.main.async {
@@ -68,44 +72,36 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if data == nil {
                         print("No data was retrieved")
                     } else {
-                        let json = try! JSONSerialization.jsonObject(with: data!, options: [])
-                        print(json)
-                        NSLog(data!.description)
+                        let decoder = JSONDecoder()
+                        do {
+                            self.topics = try decoder.decode([Topic].self, from: data!)
+                            self.topicTable.reloadData()
+                            print(self.topics)
+                        } catch {
+                            print(error)
+                        }
                     }
                 } else {
                     print(error ?? "Error")
                 }
-                self.spinner.stopAnimating()
             }
         }).resume()
-    }
-    
-
-    let topics = [
-        Topic(name: "Mathematics", desc: "See if you paid attention in high school math class!", img: UIImage(systemName: "plus")),
-        Topic(name: "Marvel Superheroes", desc: "Are you armed and dangerous with Marvel knowledge?", img: UIImage(systemName: "figure.run")),
-        Topic(name: "Science", desc: "Would Bill Nye approve?", img: UIImage(systemName: "atom"))
-    ]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        topicTable.dataSource = self
-        topicTable.delegate = self
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopicCell", for: indexPath)
 
         let topic = topics[indexPath.row]
-        cell.textLabel?.text = topic.name
+        cell.textLabel?.text = topic.title
         cell.detailTextLabel?.numberOfLines = 3
         cell.detailTextLabel?.text = topic.desc
-        cell.imageView?.image = topic.img
+        if indexPath.row == 0 {
+            cell.imageView?.image = UIImage(systemName: "atom")
+        } else if indexPath.row == 1 {
+            cell.imageView?.image = UIImage(systemName: "figure.run")
+        } else {
+            cell.imageView?.image = UIImage(systemName: "plus")
+        }
 
         return cell
     }
@@ -123,13 +119,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToQuestionVC", sender: topics[indexPath.row].name)
+        performSegue(withIdentifier: "goToQuestionVC", sender: topics[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToQuestionVC" {
             if let destinationVC = segue.destination as? QuestionViewController,
-               let name = sender as? String {
+               let name = sender as? Topic {
                     destinationVC.receivedData = name
                 }
         }

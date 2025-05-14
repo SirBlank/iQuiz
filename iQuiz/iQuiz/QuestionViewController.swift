@@ -7,24 +7,9 @@
 
 import UIKit
 
-let questionBank = [
-    "Mathematics": [
-        Question(text: "What is 9 + 10?", answers: ["2", "19", "21", "22"], correctIndex: 1),
-        Question(text: "What is 100 - 25?", answers: ["75", "80", "90", "100"], correctIndex: 0)
-    ],
-    "Marvel Superheroes": [
-        Question(text: "Who is Spiderman", answers: ["Peter Parker", "J. Jonah Jameson", "Tony Stark"], correctIndex: 0),
-        Question(text: "What is the name of Thor's hammer?", answers: ["Milnojuor", "Mijolnier", "Jonathon", "Mjolnir"], correctIndex: 3),
-        Question(text: "Which of Bucky's arms is made of metal?", answers: ["Right", "Left"], correctIndex: 1)
-    ],
-    "Science": [
-        Question(text: "How many bones are there in a human foot?", answers: ["26", "28", "30", "32"], correctIndex: 0),
-        Question(text: "Which animal possesses the largest brain relative to its body size?", answers: ["Elephant", "Sperm whale", "Dolphin", "Gorilla"], correctIndex: 1)
-    ]
-]
 
 class QuestionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var receivedData: String?
+    var receivedData: Topic?
     
     var currentQuestions: [Question] = []
     var currentIndex = 0
@@ -53,9 +38,9 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         resultBtn.isHidden = true
         
         if let data = receivedData {
-            topicLabel.text = data
-            numQuestions = questionBank[data]?.count ?? 0
-            currentQuestions = questionBank[data] ?? []
+            topicLabel.text = data.title
+            numQuestions = data.questions.count
+            currentQuestions = data.questions
             showCurrentQuestion()
         }
         
@@ -79,7 +64,7 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         cell.accessoryType = (indexPath.row == selectedAnswerIndex) ? .checkmark : .none
         
         if hasSubmitted {
-            let correctIndex = currentQuestions[currentIndex].correctIndex
+            let correctIndex = Int(currentQuestions[currentIndex].answer)! - 1
             if indexPath.row == correctIndex {
                 cell.textLabel?.textColor = .green
             } else if indexPath.row == selectedAnswerIndex {
@@ -110,7 +95,7 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         guard let selected = selectedAnswerIndex else { return }
         
         if !hasSubmitted {
-            let correctIndex = currentQuestions[currentIndex].correctIndex
+            let correctIndex = Int(currentQuestions[currentIndex].answer)! - 1
             if selected == correctIndex {
                 score += 1
             }
