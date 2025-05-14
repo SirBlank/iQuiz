@@ -28,11 +28,18 @@ class SettingsViewController: UIViewController {
     }
     
     func sendRequest(url: String) {
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+        
         let url = URL(string: url)
         
         if url == nil {
             statusLabel.text = "Invalid URL!"
             statusLabel.isHidden = false
+            alert.title = "Error"
+            alert.message = "Invalid URL!"
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
             return
         }
         
@@ -59,6 +66,10 @@ class SettingsViewController: UIViewController {
                     if data == nil {
                         self.statusLabel.text = "No data returned!"
                         self.statusLabel.isHidden = false
+                        alert.title = "Error"
+                        alert.message = "No data returned!"
+                        alert.addAction(okAction)
+                        self.present(alert, animated: true)
                     } else {
                         let decoder = JSONDecoder()
                         do {
@@ -66,15 +77,26 @@ class SettingsViewController: UIViewController {
                             UserDefaults.standard.set(data, forKey: "quizData")
                             self.statusLabel.text = "Data retrieved!"
                             self.statusLabel.isHidden = false
+                            alert.title = "Success!"
+                            alert.message = "Data retrieved successfully!"
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true)
                         } catch {
                             self.statusLabel.text = "Error parsing JSON!"
                             self.statusLabel.isHidden = false
+                            alert.title = "Error"
+                            alert.message = "Error parsing JSON!"
+                            alert.addAction(okAction)
+                            self.present(alert, animated: true)
                         }
                     }
                 } else {
                     self.statusLabel.text = "Request failed!"
                     self.statusLabel.isHidden = false
-                    print(error ?? "Error")
+                    alert.title = "Error"
+                    alert.message = "Request failed!"
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
                 }
             }
         }).resume()
