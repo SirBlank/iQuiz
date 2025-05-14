@@ -19,11 +19,12 @@ struct Question {
     var correctIndex: Int
 }
 
-class topicTableCell: UITableViewCell {
-    @IBOutlet weak var topicLabel: UILabel!
-}
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var addressField: UITextField!
+    @IBOutlet weak var topicTable: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBAction func settingTap(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
@@ -32,7 +33,53 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         present(alert, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var topicTable: UITableView!
+    @IBAction func goPushed(_ sender: Any) {
+        var url = URL(string: self.addressField.text!)
+        
+        if url == nil {
+            NSLog("Bad address")
+            return
+        } else {
+            var comps = URLComponents(url: url!, resolvingAgainstBaseURL: false)
+            comps?.scheme = "https"
+            url = comps?.url!
+        }
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        spinner.startAnimating()
+        
+        (URLSession.shared.dataTask(with: url!) {
+            data, response, error in
+          
+            DispatchQueue.main.async {
+                if error == nil {
+                    NSLog(response!.description)
+              
+                    let response = response! as! HTTPURLResponse
+              
+                    var headers = ""
+                    headers = "\(response.statusCode)\n"
+                    for (name, value) in response.allHeaderFields {
+                        headers += "\(name as! String) = \(value as! String)\n"
+                    }
+              
+                    if data == nil {
+                        print("No data was retrieved")
+                    } else {
+                        let json = try! JSONSerialization.jsonObject(with: data!, options: [])
+                        print(json)
+                        NSLog(data!.description)
+                    }
+                } else {
+                    print(error ?? "Error")
+                }
+                self.spinner.stopAnimating()
+            }
+        }).resume()
+    }
+    
 
     let topics = [
         Topic(name: "Mathematics", desc: "See if you paid attention in high school math class!", img: UIImage(systemName: "plus")),
@@ -44,7 +91,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         topicTable.dataSource = self
         topicTable.delegate = self
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+      super.didReceiveMemoryWarning()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,15 +134,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

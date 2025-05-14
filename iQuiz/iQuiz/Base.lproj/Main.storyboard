@@ -41,8 +41,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zkh-Fq-jXf">
-                                <rect key="frame" x="16" y="143" width="361" height="413"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http://tednewardsandbox.site44.com/questions.json" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjK-g8-VmH">
+                                <rect key="frame" x="16" y="172" width="250" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7QG-Nn-SkB"/>
+                                    <constraint firstAttribute="width" constant="250" id="ix5-8s-eYp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qj4-1H-LCX">
+                                <rect key="frame" x="347" y="172" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PKG-GZ-Mn5"/>
+                                    <constraint firstAttribute="width" constant="30" id="jgC-jc-zDL"/>
+                                </constraints>
+                                <state key="normal" title="Go"/>
+                                <connections>
+                                    <action selector="goPushed:" destination="54Z-b5-dYT" eventType="touchUpInside" id="Ids-4z-05d"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-tf-F8u">
+                                <rect key="frame" x="282" y="177" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4ji-VE-y4M"/>
+                                    <constraint firstAttribute="width" constant="20" id="MQo-LN-QGQ"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zkh-Fq-jXf">
+                                <rect key="frame" x="16" y="245" width="361" height="413"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="361" id="4Kg-mx-h54"/>
@@ -81,19 +108,30 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Zkh-Fq-jXf" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="4Zs-hy-bSD"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="qj4-1H-LCX" secondAttribute="bottom" constant="43" id="75K-1o-mNW"/>
+                            <constraint firstItem="qj4-1H-LCX" firstAttribute="top" secondItem="cZv-DM-MjL" secondAttribute="bottom" constant="75" id="8tJ-GC-97H"/>
                             <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="FLC-Fj-3wD" secondAttribute="trailing" constant="71.670000000000002" id="ADU-6U-W1H"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="PjK-g8-VmH" secondAttribute="bottom" constant="43" id="Bb5-eA-qos"/>
                             <constraint firstItem="FLC-Fj-3wD" firstAttribute="top" secondItem="cZv-DM-MjL" secondAttribute="bottom" id="DOh-Ll-Y9L"/>
+                            <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="qj4-1H-LCX" secondAttribute="trailing" constant="16" id="Kn7-Re-MZv"/>
                             <constraint firstItem="cZv-DM-MjL" firstAttribute="top" secondItem="lKN-fW-UvA" secondAttribute="top" constant="53" id="NFo-OE-rnD"/>
-                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="FLC-Fj-3wD" secondAttribute="bottom" constant="7.6699999999999999" id="Qfq-1V-3RA"/>
-                            <constraint firstItem="wAB-ED-DOF" firstAttribute="trailing" secondItem="Zkh-Fq-jXf" secondAttribute="trailing" constant="16" id="SxU-kz-ads"/>
                             <constraint firstAttribute="trailing" secondItem="cZv-DM-MjL" secondAttribute="trailing" id="VTv-zA-xTV"/>
+                            <constraint firstItem="PjK-g8-VmH" firstAttribute="leading" secondItem="wAB-ED-DOF" secondAttribute="leading" constant="16" id="XQc-fd-1Ik"/>
+                            <constraint firstItem="AfX-tf-F8u" firstAttribute="top" secondItem="FLC-Fj-3wD" secondAttribute="bottom" constant="41.670000000000002" id="dtD-GF-UbU"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="PjK-g8-VmH" secondAttribute="bottom" constant="43" id="eLD-nt-v1h"/>
+                            <constraint firstItem="Zkh-Fq-jXf" firstAttribute="top" secondItem="AfX-tf-F8u" secondAttribute="bottom" constant="48" id="fI5-AG-8i1"/>
                             <constraint firstItem="cZv-DM-MjL" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="kYI-8q-orj"/>
+                            <constraint firstItem="AfX-tf-F8u" firstAttribute="leading" secondItem="PjK-g8-VmH" secondAttribute="trailing" constant="16" id="neo-e3-cGd"/>
                             <constraint firstItem="FLC-Fj-3wD" firstAttribute="centerX" secondItem="lKN-fW-UvA" secondAttribute="centerX" id="o2A-TU-fWX"/>
+                            <constraint firstItem="wAB-ED-DOF" firstAttribute="bottom" secondItem="Zkh-Fq-jXf" secondAttribute="bottom" constant="160" id="qwg-Ju-zIW"/>
+                            <constraint firstItem="PjK-g8-VmH" firstAttribute="top" secondItem="FLC-Fj-3wD" secondAttribute="bottom" constant="36.670000000000002" id="rmi-rL-D11"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xZc-I3-VOr"/>
                     <connections>
-                        <outlet property="topicTable" destination="Zkh-Fq-jXf" id="KZT-bZ-bys"/>
+                        <outlet property="addressField" destination="PjK-g8-VmH" id="yPu-Tc-cIq"/>
+                        <outlet property="spinner" destination="AfX-tf-F8u" id="A0Q-YZ-onJ"/>
+                        <outlet property="topicTable" destination="Zkh-Fq-jXf" id="iHS-sd-4mi"/>
                         <segue destination="qgU-Or-hY7" kind="presentation" identifier="goToQuestionVC" modalPresentationStyle="fullScreen" id="Uzi-2z-OEN"/>
                     </connections>
                 </viewController>
@@ -184,7 +222,7 @@
                                 <rect key="frame" x="16" y="190" width="361" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="dJu-RV-cWm"/>
-                                    <constraint firstAttribute="width" constant="361" id="sb5-JJ-Y7f"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="361" id="sb5-JJ-Y7f"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
