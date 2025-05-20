@@ -26,8 +26,7 @@
                                     <barButtonItem title="Settings" width="83" id="Go5-Zo-wGI">
                                         <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
                                         <connections>
-                                            <action selector="settingTap:" destination="54Z-b5-dYT" id="gxk-zQ-ifD"/>
-                                            <segue destination="0TL-ir-qa9" kind="presentation" id="U1y-hE-miT"/>
+                                            <action selector="openSettings:" destination="54Z-b5-dYT" id="3dn-1o-uLF"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -107,11 +106,11 @@
             <objects>
                 <viewController id="0TL-ir-qa9" customClass="SettingsViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fzm-YY-2V4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL goes here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjK-g8-VmH">
-                                <rect key="frame" x="38" y="225" width="208" height="34"/>
+                                <rect key="frame" x="38" y="226" width="208" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="208" id="B2w-q2-Fak"/>
                                     <constraint firstAttribute="height" constant="34" id="rJa-lM-tT7"/>
@@ -121,7 +120,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qj4-1H-LCX">
-                                <rect key="frame" x="261" y="225" width="76" height="30"/>
+                                <rect key="frame" x="261" y="226" width="76" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="V41-OK-TML"/>
                                     <constraint firstAttribute="width" constant="76" id="tQe-9N-PFE"/>
@@ -132,14 +131,14 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="AfX-tf-F8u">
-                                <rect key="frame" x="345" y="230" width="20" height="20"/>
+                                <rect key="frame" x="345" y="231" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="65i-cw-wXM"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Dcn-ua-sFQ"/>
                                 </constraints>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter an alternative source:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCN-Nh-y63">
-                                <rect key="frame" x="38" y="196" width="327" height="21"/>
+                                <rect key="frame" x="38" y="197" width="327" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4Tf-A3-VmW"/>
                                     <constraint firstAttribute="width" constant="327" id="ttV-L9-tue"/>
@@ -149,7 +148,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y1-hI-UrO">
-                                <rect key="frame" x="143" y="100" width="107" height="36"/>
+                                <rect key="frame" x="143" y="101" width="107" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="107" id="WIi-qx-fDu"/>
                                     <constraint firstAttribute="height" constant="36" id="ZFF-NN-hhZ"/>
@@ -159,7 +158,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIq-nf-RiV">
-                                <rect key="frame" x="38" y="263" width="208" height="21"/>
+                                <rect key="frame" x="38" y="264" width="208" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Drl-TA-yBR"/>
                                     <constraint firstAttribute="width" constant="208" id="PPR-Zo-VoF"/>

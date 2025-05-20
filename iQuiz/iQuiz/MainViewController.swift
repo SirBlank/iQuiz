@@ -24,6 +24,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var topicTable: UITableView!
     
+    @IBAction func openSettings(_ sender: Any) {
+        if let appSettings = URL(string: UIApplication.openSettingsURLString),
+           UIApplication.shared.canOpenURL(appSettings) {
+            UIApplication.shared.open(appSettings)
+        }
+    }
+    
     var topics = [Topic]()
     
     override func viewDidLoad() {
@@ -31,10 +38,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         topicTable.dataSource = self
         topicTable.delegate = self
         
-        if let savedData = UserDefaults.standard.data(forKey: "quizData") {
+//        if let savedData = UserDefaults.standard.data(forKey: "quizData") {
+//            parseData(data: savedData)
+//        } else {
+//            sendRequest(url: "http://tednewardsandbox.site44.com/questions.json")
+//        }
+        
+        if let savedData = loadFromFile(filename: "quizData.json") {
             parseData(data: savedData)
         } else {
-            sendRequest(url: "http://tednewardsandbox.site44.com/questions.json")
+            let savedURL = UserDefaults.standard.string(forKey: "quizURL") ?? "http://tednewardsandbox.site44.com/questions.json"
+            sendRequest(url: savedURL)
+        }
+        
+        let defaults = UserDefaults.standard
+        if let urlString = defaults.string(forKey: "quizURL") {
+            print(urlString)
+            sendRequest(url: urlString)
         }
         
         let refreshControl = UIRefreshControl()
@@ -44,6 +64,34 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
+    }
+    
+    func saveToFile(data: Data, filename: String) {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(filename)
+            print(fileURL)
+            do {
+                try data.write(to: fileURL)
+                print("Saved filed")
+            } catch {
+                print("Error:", error)
+            }
+        }
+    }
+    
+    func loadFromFile(filename: String) -> Data? {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(filename)
+            do {
+                let data = try Data(contentsOf: fileURL)
+                return data
+            } catch {
+                print("Error:", error)
+                return nil
+            }
+        }
+        
+        return nil
     }
     
     @objc func refreshFromUserDefaults() {
@@ -101,6 +149,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         do {
                             self.topics = try decoder.decode([Topic].self, from: data!)
                             self.topicTable.reloadData()
+                            self.saveToFile(data: data!, filename: "quizData.json")
                         } catch {
                             print(error)
                         }
@@ -110,6 +159,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }).resume()
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
